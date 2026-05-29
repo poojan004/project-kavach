@@ -1,0 +1,32 @@
+diff --git a/vulnerable-basket-route.js b/secure-basket-route.js
+index 5555555..6666666 100644
+--- a/vulnerable-basket-route.js
++++ b/secure-basket-route.js
+@@ -1,12 +1,25 @@
+ app.get('/rest/basket/:id', async (req, res) => {
+     const basketId = req.params.id;
+-    const basket = await Basket.findByPk(basketId, {
++
++    const authenticatedUserId = req.user.id;
++
++    const basket = await Basket.findByPk(basketId, {
+         include: [Product]
+     });
+ 
+     if (!basket) {
+         return res.status(404).json({ error: 'Basket not found' });
+     }
+ 
++    // Secure implementation: enforce object-level authorization
++    // The authenticated user can only access their own basket
++    if (basket.UserId !== authenticatedUserId) {
++        return res.status(403).json({
++            error: 'Forbidden: basket does not belong to authenticated user'
++        });
++    }
++
+     return res.json({
+         status: 'success',
+         data: basket
+     });
+ });
