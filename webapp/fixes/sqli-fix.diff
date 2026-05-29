@@ -1,0 +1,24 @@
+diff --git a/vulnerable-sqli.php b/secure-sqli.php
+index 1111111..2222222 100644
+--- a/vulnerable-sqli.php
++++ b/secure-sqli.php
+@@ -1,10 +1,15 @@
+ <?php
+-$id = $_GET['id'];
+-$query = "SELECT first_name, last_name FROM users WHERE user_id = '$id'";
+-$result = mysqli_query($connection, $query);
++// Secure implementation: use parameterized query instead of string concatenation
++$id = $_GET['id'];
++
++$stmt = $connection->prepare(
++    "SELECT first_name, last_name FROM users WHERE user_id = ?"
++);
++$stmt->bind_param("i", $id);
++$stmt->execute();
++$result = $stmt->get_result();
+ 
+ while ($row = mysqli_fetch_assoc($result)) {
+     echo $row['first_name'];
+     echo $row['last_name'];
+ }
+ ?>
