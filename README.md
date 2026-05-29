@@ -36,6 +36,10 @@ The engagement includes:
 - OWASP Juice Shop testing
 - OWASP Top 10 validation
 - Secure remediation
+- SAST before/after comparison
+- Secure remediation patch examples
+- Payload reference file
+- Evidence screenshots
 
 ### Workstream C — Synthesis
 - Joint threat model
