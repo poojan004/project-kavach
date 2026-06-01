@@ -1,0 +1,56 @@
+flowchart LR
+
+A[Threat Actor]
+--> B[Phishing Email]
+
+B --> C[Email Security Gateway]
+
+C --> D{Blocked?}
+
+D -- Yes --> E[Attack Stopped]
+
+D -- No --> F[User Receives Email]
+
+F --> G[User Awareness Training]
+
+G --> H{User Reports or Avoids?}
+
+H -- Yes --> E
+
+H -- No --> I[Malicious Attachment Executed]
+
+I --> J[Endpoint Protection / EDR]
+
+J --> K{Malware Detected?}
+
+K -- Yes --> L[Endpoint Isolated]
+
+K -- No --> M[XLoader Executes]
+
+M --> N[DNS Security Layer]
+
+N --> O{Malicious Domain Blocked?}
+
+O -- Yes --> E
+
+O -- No --> P[External Communication Attempt]
+
+P --> Q[Network Monitoring / IDS]
+
+Q --> R{Suspicious Traffic Detected?}
+
+R -- Yes --> S[SIEM Alert Created]
+
+R -- No --> T[Potential C2 Communication]
+
+S --> U[Incident Response]
+
+L --> U
+
+U --> V[Containment and Recovery]
+
+T --> W[Business Risk]
+
+V --> X[Reduced Impact]
+
+W --> Y[Credential Theft / Data Exposure Risk]
