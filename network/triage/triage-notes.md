@@ -1,80 +1,129 @@
-# Network Traffic Triage Notes
+# Triage Notes
 
-## Dataset Information
+## Case Information
 
-Dataset: 2025-01-30 XLoader Infection Traffic
+Date Analyzed: 02-Jun-2026
 
-Analyst: Poojan Patel and Shilpa soni
+Analyst:
+- Poojan Patel
+- Shilpa Soni
 
-Review Date: June 2026
+Capture File:
+2025-01-30-XLoader-infection-traffic.pcap
 
 ---
 
 ## Initial Review
 
-The packet capture was loaded into Wireshark and reviewed using protocol hierarchy statistics and packet-level inspection.
+The packet capture was opened using Wireshark.
 
-The capture contains 18,224 packets and represents a Windows host communicating with multiple external systems.
+Initial protocol analysis identified:
 
----
+- TCP
+- HTTP
+- HTTPS/TLS
+- DNS
+- ARP
+- SMB
 
-## Protocol Distribution
+Total packets observed:
 
-| Protocol | Observation |
-|-----------|------------|
-| IPv4 | Primary protocol observed |
-| TCP | Dominant transport protocol (98.0%) |
-| DNS | Used for domain resolution |
-| HTTP | Used for outbound communications |
-| TLS | Encrypted sessions observed |
-| ARP | Local network communications |
+18224 packets
 
 ---
 
-## Host Under Investigation
+## DNS Analysis
 
-Internal Host:
+A large volume of DNS lookups were observed.
 
-10.1.30.242
+Examples include:
 
-This host generated DNS lookups and established outbound HTTP/TCP connections to external systems.
-
-Based on current observations, this system is considered the likely infected endpoint.
-
----
-
-## Domains Observed
-
-- www.physicsbrain.xyz
+- physicsbrain.xyz
 - bydotoparca.net
+- autonomousrich.xyz
+- corellia.pro
+- trustai.chat
+- spreadsyndicate.net
+- bitcoinescort.xyz
+- sigmaque.today
+- hotethereum.xyz
+
+Several domains appear suspicious due to:
+
+- Random naming patterns
+- Uncommon TLD usage
+- Reputation commonly associated with malicious campaigns
 
 ---
 
-## External IP Addresses Observed
+## HTTP Activity
 
-- 76.223.54.146
-- 85.159.66.93
+HTTP traffic was identified between the internal workstation and external servers.
 
----
+Observed activity included:
 
-## Suspicious Behaviour
+- GET requests
+- POST requests
 
-Multiple outbound HTTP POST requests were observed during analysis.
-
-One observed URI:
+Example URI:
 
 /s3u9/
 
-The traffic pattern is consistent with malware initiating communications after domain resolution.
-
-The capture also contains URL-encoded HTTP content, which may indicate command-and-control communication or transfer of host information.
+POST requests may indicate data submission or malware communication.
 
 ---
 
-## Preliminary Assessment
+## External Communication
 
-Current evidence suggests that host 10.1.30.242 initiated outbound communications to external infrastructure following DNS resolution.
+Notable external IP addresses:
 
-The communication pattern is consistent with malware infection activity and warrants deeper investigation.
+- 76.223.54.146
+- 13.248.169.48
+- 85.159.66.93
+- 31.31.196.17
+- 217.160.0.90
 
-Status: Under Investigation
+---
+
+## Indicators of Suspicious Activity
+
+Observed indicators include:
+
+- Numerous suspicious DNS queries
+- Connections to multiple external hosts
+- HTTP POST requests
+- Potential malware-related domains
+- Traffic patterns consistent with malware execution
+
+---
+
+## Analyst Assessment
+
+The traffic strongly suggests malicious activity originating from the internal host.
+
+Based on observed indicators, the most likely scenario is:
+
+1. User execution of malicious file
+2. Malware infection
+3. DNS resolution of attacker-controlled infrastructure
+4. Communication with external systems
+5. Potential command-and-control activity
+
+---
+
+## Recommended Next Steps
+
+- Isolate affected endpoint
+- Collect memory artifacts
+- Review endpoint logs
+- Block identified domains
+- Block identified IP addresses
+- Perform malware analysis on associated samples
+
+---
+
+## Status
+
+Investigation Status: Completed
+
+Risk Rating: High
