@@ -1,0 +1,37 @@
+┌─────────────────────┐
+│ Infected Workstation│
+│ 10.1.30.242         │
+└──────────┬──────────┘
+           │
+           │ DNS Query
+           ▼
+┌─────────────────────┐
+│ DNS Server          │
+│ 10.1.30.1           │
+└──────────┬──────────┘
+           │
+           │ Resolution
+           ▼
+┌─────────────────────┐
+│ Suspicious Domains  │
+│ physicsbrain.xyz    │
+│ bydotoparca.net     │
+│ sigmaque.today      │
+│ hotethereum.xyz     │
+└──────────┬──────────┘
+           │
+           │ HTTP/HTTPS
+           ▼
+┌─────────────────────┐
+│ External Servers    │
+│ 76.223.54.146       │
+│ 13.248.169.48       │
+│ 85.159.66.93        │
+└──────────┬──────────┘
+           │
+           │ Malware Traffic
+           ▼
+┌─────────────────────┐
+│ Suspected XLoader   │
+│ Infrastructure      │
+└─────────────────────┘
