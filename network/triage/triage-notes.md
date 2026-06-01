@@ -1,71 +1,80 @@
-# Network Triage Notes
+# Network Traffic Triage Notes
 
-## Dataset
+## Dataset Information
 
-Source:
+Dataset: 2025-01-30 XLoader Infection Traffic
 
-2025-01-30 XLoader Infection Traffic
+Analyst: Poojan Patel and Shilpa soni
 
-Analyst:
-
-Poojan Patel
-
-Date Reviewed:
-
-June 2026
+Review Date: June 2026
 
 ---
 
-## Initial Observations
+## Initial Review
 
-The packet capture was opened in Wireshark and reviewed using a broad triage approach.
+The packet capture was loaded into Wireshark and reviewed using protocol hierarchy statistics and packet-level inspection.
 
-A workstation with IP address 10.1.30.242 generated DNS queries and established outbound connections to multiple external hosts.
-
-The following domains were observed early in the capture:
-
-- www.physicsbrain.xyz
-- bydotoparca.net
-
-The following external IP addresses were identified:
-
-- 76.223.54.146
-- 85.159.66.93
-
-Multiple HTTP POST requests were observed, including:
-
-POST /s3u9/ HTTP/1.1
-
-This activity may indicate malware command-and-control communication or outbound data transfer.
+The capture contains 18,224 packets and represents a Windows host communicating with multiple external systems.
 
 ---
 
-## Potentially Infected Host
+## Protocol Distribution
+
+| Protocol | Observation |
+|-----------|------------|
+| IPv4 | Primary protocol observed |
+| TCP | Dominant transport protocol (98.0%) |
+| DNS | Used for domain resolution |
+| HTTP | Used for outbound communications |
+| TLS | Encrypted sessions observed |
+| ARP | Local network communications |
+
+---
+
+## Host Under Investigation
+
+Internal Host:
 
 10.1.30.242
 
-Reason:
+This host generated DNS lookups and established outbound HTTP/TCP connections to external systems.
 
-This system generated DNS activity, initiated outbound HTTP communications, and appears central to the observed traffic patterns.
+Based on current observations, this system is considered the likely infected endpoint.
 
 ---
 
-## Candidate Indicators
-
-Domains:
+## Domains Observed
 
 - www.physicsbrain.xyz
 - bydotoparca.net
 
-IPs:
+---
+
+## External IP Addresses Observed
 
 - 76.223.54.146
 - 85.159.66.93
 
-URI:
+---
 
-- /s3u9/
+## Suspicious Behaviour
 
-Status:
+Multiple outbound HTTP POST requests were observed during analysis.
 
-Under Investigation
+One observed URI:
+
+/s3u9/
+
+The traffic pattern is consistent with malware initiating communications after domain resolution.
+
+The capture also contains URL-encoded HTTP content, which may indicate command-and-control communication or transfer of host information.
+
+---
+
+## Preliminary Assessment
+
+Current evidence suggests that host 10.1.30.242 initiated outbound communications to external infrastructure following DNS resolution.
+
+The communication pattern is consistent with malware infection activity and warrants deeper investigation.
+
+Status: Under Investigation
