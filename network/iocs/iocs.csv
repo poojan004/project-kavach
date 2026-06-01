@@ -1,0 +1,26 @@
+Type,Value,Confidence,Source
+Host,10.1.30.242,High,Wireshark Endpoint Analysis
+Domain,physicsbrain.xyz,High,DNS Query
+Domain,bydotoparca.net,High,DNS Query
+Domain,car-select.online,Medium,DNS Query
+Domain,autonomousrich.xyz,High,DNS Query
+Domain,corellia.pro,Medium,DNS Query
+Domain,jili999.net,Medium,DNS Query
+Domain,avisos-bbva.info,High,DNS Query
+Domain,theweb.services,Medium,DNS Query
+Domain,dogebonus.xyz,High,DNS Query
+Domain,trustai.chat,Medium,DNS Query
+Domain,spreadsyndicate.net,High,DNS Query
+Domain,bitcoinescort.xyz,High,DNS Query
+Domain,sigmaque.today,High,DNS Query
+Domain,hotethereum.xyz,High,DNS Query
+IP,76.223.54.146,High,HTTP Communication
+IP,13.248.169.48,High,HTTP Communication
+IP,85.159.66.93,High,HTTP Communication
+IP,31.31.196.17,Medium,Observed Endpoint
+IP,217.160.0.90,Medium,Observed Endpoint
+IP,104.21.20.191,Medium,Observed Endpoint
+IP,172.67.194.22,Medium,Observed Endpoint
+IP,5.134.116.201,Medium,Observed Endpoint
+URI,/s3u9/,High,HTTP POST Request
+Method,POST,High,HTTP Traffic
