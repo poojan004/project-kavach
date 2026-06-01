@@ -8,37 +8,52 @@
 
 ---
 
-## Domains Observed
+## Suspicious Domains Observed
 
-| Type | Value |
-|--------|---------|
-| Domain | www.physicsbrain.xyz |
-| Domain | bydotoparca.net |
+| Domain |
+|----------|
+| physicsbrain.xyz |
+| bydotoparca.net |
+| car-select.online |
+| autonomousrich.xyz |
+| corellia.pro |
+| jili999.net |
+| avisos-bbva.info |
+| theweb.services |
+| dogebonus.xyz |
+| trustai.chat |
+| spreadsyndicate.net |
+| bitcoinescort.xyz |
+| sigmaque.today |
+| hotethereum.xyz |
 
 ---
 
-## External IP Addresses Observed
+## External IP Addresses
 
-| IP Address | Notes |
-|------------|---------|
-| 76.223.54.146 | Observed during HTTP communication |
-| 85.159.66.93 | Observed during HTTP POST activity |
-| 23.219.160.228 | Observed during outbound communication |
-| 31.31.196.17 | Requires further validation |
-| 104.21.20.191 | Requires further validation |
-| 104.21.64.1 | Requires further validation |
+| IP |
+|---------|
+| 76.223.54.146 |
+| 13.248.169.48 |
+| 85.159.66.93 |
+| 31.31.196.17 |
+| 217.160.0.90 |
+| 104.21.20.191 |
+| 172.67.194.22 |
+| 5.134.116.201 |
 
 ---
 
-## HTTP Artifacts
+## HTTP Activity
 
 | Type | Value |
 |--------|---------|
-| URI | /s3u9/ |
+| Method | GET |
 | Method | POST |
+| URI | /s3u9/ |
 
 ---
 
-## Status
+## Notes
 
-IOC validation in progress.
+Several domains appear randomly generated and are consistent with malicious advertising, phishing, malware delivery, or command-and-control infrastructure commonly observed during malware infections.
