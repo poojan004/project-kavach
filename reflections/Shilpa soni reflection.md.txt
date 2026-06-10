@@ -1,0 +1,116 @@
+# Individual Reflection Questionnaire – Shilpa Soni
+
+## Q1. Identify a specific packet, frame, or flow in your chosen capture that changed how you thought about what was happening.
+
+The packet that changed my understanding the most was **Packet 18**, which contained the HTTP request:
+
+`GET /pagead/ads`
+
+The request was sent from **145.254.160.237** to **216.239.59.99** at approximately **2.984291 seconds** in the capture. At first, I thought the traffic might indicate suspicious external communication because I saw the client contacting multiple external IP addresses. After examining the DNS packets and the HTTP request details, I realized that the traffic was related to **pagead2.googlesyndication.com**, which is associated with online advertisements.
+
+The protocol-level detail that mattered was the combination of the DNS response and the HTTP GET request. Before looking deeper, I interpreted the traffic as potentially suspicious. After correlating the DNS and HTTP activity, I understood that it was most likely normal web browsing behavior with advertisement content being loaded in the background.
+
+---
+
+## Q2. Describe one hypothesis your team formed about the network capture that turned out to be wrong.
+
+One hypothesis we initially considered was that the external communication to advertisement-related domains might indicate malicious activity or command-and-control traffic.
+
+The evidence that led us to this idea was:
+
+* Multiple external IP addresses were contacted.
+* DNS lookups were occurring for domains outside the primary website.
+* HTTP traffic was being sent to a different server than the one hosting the main page.
+
+However, this hypothesis was disproved when we reviewed:
+
+* DNS responses for `pagead2.googlesyndication.com`
+* HTTP requests to `/pagead/ads`
+* The referer values showing the requests originated from the page being viewed
+
+The evidence showed that the traffic was consistent with a web page loading advertisement content rather than malware communication.
+
+---
+
+## Q3. Pick one vulnerability your team demonstrated in the web environment. Walk through the exact payload progression.
+
+The vulnerability I chose was **SQL Injection** in DVWA.
+
+My first attempt was simply entering:
+
+`1`
+
+This returned information for a single user, which confirmed the page was querying a database but did not demonstrate a vulnerability.
+
+Next, I tried:
+
+`1'`
+
+This generated an error, which suggested that user input was being inserted directly into a SQL statement.
+
+Based on that result, I adjusted the payload to:
+
+`1' OR '1'='1`
+
+This returned multiple user records, including admin, Gordon Brown, Hack Me, Pablo Picasso, and Bob Smith.
+
+The moment that helped me understand what was happening was seeing the difference between the second and third attempts. The single quote caused a SQL syntax issue, which indicated the application was not properly handling input. Once I added the logical condition `OR '1'='1'`, the query evaluated as true for all records, which explained why multiple users were returned.
+
+---
+
+## Q4. For the same vulnerability, describe the remediation you wrote at the code level.
+
+For SQL Injection, the remediation I documented was the use of **parameterized queries (prepared statements)**.
+
+I recommended changing code that directly concatenates user input into SQL queries and replacing it with parameterized database calls.
+
+I chose this approach because it separates user input from the SQL command itself. Even if an attacker submits malicious input, the database treats it as data rather than executable SQL.
+
+We also discussed input validation as an alternative. While validation is useful, I would not rely on it alone because it is easy to miss edge cases and bypasses. Parameterized queries provide stronger protection and do not depend on predicting every possible malicious input. Input validation can complement prepared statements, but it should not replace them.
+
+---
+
+## Q5. Where in the engagement did an LLM mislead you?
+
+One example occurred during the IOC documentation process. Initially, the LLM suggested that some details, particularly the User-Agent information, were not clearly visible and should be marked as unknown.
+
+I realized this was incomplete because I had not yet opened the full HTTP packet details in Wireshark. After expanding Packet 4 and Packet 18, I found the actual User-Agent string:
+
+`Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.6) Gecko/20040113`
+
+This reminded me that screenshots and summaries are useful, but security findings must always be verified directly in the source evidence. Instead of accepting the initial answer, I went back to the packet details and collected the information myself.
+
+---
+
+## Q6. Identify one finding from your network analysis that a determined attacker could have used as a stepping stone toward the web portal.
+
+A useful connection between the network and web analysis was the identification of the web server and application behavior through HTTP traffic.
+
+From the network capture, I could see:
+
+* HTTP requests
+* DNS lookups
+* Web server IP addresses
+* Requested pages
+
+An attacker performing reconnaissance could use this information to identify the target web application and understand how users interact with it.
+
+Once the application is identified, the next step would be web testing. For example, the attacker could move from observing HTTP traffic to testing input fields for vulnerabilities such as SQL Injection. In other words, network reconnaissance could provide the information needed to begin targeted application attacks.
+
+---
+
+## Q7. What is one decision in the defense-in-depth proposal that you would lose sleep over if you were the CISO who had to fund it?
+
+The decision I would worry most about is implementing strong authentication controls such as mandatory MFA and account lockout policies across all critical systems.
+
+From a security perspective, it is clearly the right decision because weak authentication was one of the vulnerabilities we demonstrated. However, it also creates operational challenges. Users may complain about additional login steps, helpdesk calls may increase, and implementation costs can be significant.
+
+Despite those concerns, I would still support the recommendation because credential-based attacks remain one of the most common attack vectors. The inconvenience and cost are much smaller than the impact of a successful account compromise.
+
+---
+
+## Q8. Look at your repository's commit history. Identify the commit you are most proud of and the commit you would redo.
+
+The commit I am most proud of is the one where I completed the **network forensics analysis and final report**, because it required me to connect packet-level evidence, IOC collection, hypotheses, and reporting into a single investigation.
+
+The commit I would redo is the initial web application findings documentation because I skipped the IDOR finding at first and later had to go back and complete it after reviewing the project requirements.
