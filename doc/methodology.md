@@ -4,7 +4,9 @@
 
 This document describes the methodology followed during Project KAVACH to assess the security posture of web applications and analyze network traffic associated with suspected malware activity.
 
+
 The assessment was conducted using a structured approach that included web application security testing, static analysis review, network traffic analysis, threat modeling, and defensive architecture evaluation.
+
 
 ---
 
