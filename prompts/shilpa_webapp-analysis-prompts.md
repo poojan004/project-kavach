@@ -5,7 +5,6 @@
 Review the application and identify anything that appears insecure or unusual.
 
 Look for:
-
 - Input validation issues
 - Authorization weaknesses
 - Error messages
