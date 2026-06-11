@@ -9,7 +9,6 @@ Based on the analysis of the XLoader malware infection, a single security contro
 This document outlines the recommended defense-in-depth approach for mitigating similar threats.
 
 ---
-
 ## Identified Attack Chain
 
 The observed attack path can be summarized as follows:
