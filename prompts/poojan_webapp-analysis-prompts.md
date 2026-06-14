@@ -2,19 +2,19 @@
 
 ## Purpose
 
-These prompts were used to assist with web application security testing activities performed during Project KAVACH. The objective was to understand vulnerabilities, validate findings, and identify possible remediation approaches while maintaining evidence-based analysis.
+These prompts were used during Project KAVACH to support web application security assessment activities. The prompts helped analyze findings, understand vulnerabilities, validate security controls, and document remediation recommendations.
 
 ---
 
 # Prompt 1 – Understanding Application Functionality
 
 ```text
-Review the following web application page and explain:
+Review the functionality of the target web application and identify:
 
-1. What functionality is being provided?
-2. What user inputs are accepted?
-3. What backend processing may occur?
-4. Which security risks should be considered?
+1. Purpose of the page or feature.
+2. User inputs accepted by the application.
+3. Backend processing that may occur.
+4. Potential security risks associated with the feature.
 
 Provide the explanation in simple language suitable for a security assessment report.
 ```
@@ -24,37 +24,43 @@ Provide the explanation in simple language suitable for a security assessment re
 # Prompt 2 – SQL Injection Assessment
 
 ```text
-I am testing a web application input field.
+I tested the DVWA SQL Injection page using multiple payloads.
 
-Based on the following request and response:
+Observed Results:
 
-[Paste Request]
-[Paste Response]
+- Input 1 displayed valid user information.
+- Input 2 displayed valid user information.
+- Input 3 generated a database error.
 
-Help me determine:
+Based on these observations:
 
-1. Whether SQL Injection may be possible.
-2. What indicators support the finding.
-3. Safe test cases to validate the vulnerability.
-4. Possible impact if exploitation is successful.
+1. Does this indicate SQL Injection?
+2. What type of SQL Injection is likely present?
+3. What evidence should be included in the report?
+4. What remediation should be recommended?
+5. What business impact could result from exploitation?
 ```
 
 ---
 
-# Prompt 3 – Cross-Site Scripting Analysis
+# Prompt 3 – Cross-Site Scripting (XSS) Analysis
 
 ```text
-Analyze the following application response after an XSS payload was submitted.
+I tested the application using multiple JavaScript payloads.
 
-[Paste Response]
+Observed Results:
 
-Determine:
+- JavaScript alert box executed successfully.
+- User-supplied input was reflected in the browser.
+- Payload execution occurred without sanitization.
 
-1. Whether the payload executed.
-2. Type of XSS observed.
-3. Evidence supporting the finding.
-4. Potential business impact.
-5. Recommended remediation.
+Help me:
+
+1. Identify the XSS category.
+2. Explain the security impact.
+3. Draft a professional finding description.
+4. Recommend remediation steps.
+5. Determine the risk severity.
 ```
 
 ---
@@ -62,67 +68,74 @@ Determine:
 # Prompt 4 – Authentication Review
 
 ```text
-Review the following authentication workflow.
+I reviewed the application's authentication process.
 
-[Paste Workflow]
+Observations:
 
-Identify:
+- Weak passwords were accepted.
+- No account lockout mechanism was observed.
+- Error messages revealed login behavior.
 
-1. Weak authentication controls.
-2. Password policy concerns.
-3. Session management issues.
-4. Brute-force attack exposure.
-5. Security improvement recommendations.
+Help identify:
+
+1. Authentication weaknesses.
+2. Associated OWASP risks.
+3. Business impact.
+4. Recommended security improvements.
+5. Appropriate severity level.
 ```
 
 ---
 
-# Prompt 5 – Authorization Testing
+# Prompt 5 – Authorization and IDOR Testing
 
 ```text
-Review the following authenticated request.
+I tested basket-related API requests in OWASP Juice Shop.
 
-[Paste Request]
+Observations:
 
-Determine:
+- Requests were made using different basket IDs.
+- Authorization tokens were present.
+- Access control behavior was reviewed.
 
-1. Whether authorization controls appear effective.
-2. Potential IDOR exposure.
-3. Objects that should be access controlled.
-4. Additional test cases that should be performed.
+Help determine:
+
+1. Whether IDOR risk exists.
+2. Evidence required to support the finding.
+3. Proper authorization controls.
+4. Recommended remediation.
+5. Risk rating for the vulnerability.
 ```
 
 ---
 
-# Prompt 6 – Security Header Validation
+# Prompt 6 – Security Header Review
 
 ```text
-Analyze the following HTTP response headers.
+I reviewed the HTTP response headers returned by the application.
 
-[Paste Headers]
-
-Identify:
+Help identify:
 
 1. Missing security headers.
 2. Incorrect header configurations.
-3. Risks created by missing protections.
-4. Recommended secure configuration.
+3. Risks associated with missing protections.
+4. Recommended secure header configuration.
+5. Overall security posture of the application.
 ```
 
 ---
 
-# Prompt 7 – Vulnerability Reporting
+# Prompt 7 – Vulnerability Documentation
 
 ```text
-Based on the evidence below, help draft a professional vulnerability finding.
-
-[Paste Evidence]
+Based on the collected testing evidence, help draft a professional vulnerability finding.
 
 Include:
 
-- Title
+- Vulnerability Title
 - Description
 - Technical Details
+- Evidence
 - Impact
 - Risk Rating
 - Remediation
@@ -134,18 +147,15 @@ Include:
 # Prompt 8 – Remediation Verification
 
 ```text
-Review the before and after implementation.
+A vulnerability was identified and a remediation was implemented.
 
-[Paste Original Code]
+Help evaluate:
 
-[Paste Updated Code]
-
-Explain:
-
-1. What vulnerability existed originally.
-2. What security controls were added.
-3. Whether the remediation is effective.
-4. Any remaining risks.
+1. Whether the original vulnerability has been resolved.
+2. Security controls introduced by the fix.
+3. Any remaining security risks.
+4. Additional hardening recommendations.
+5. Validation steps that should be performed.
 ```
 
 ---
@@ -153,17 +163,15 @@ Explain:
 # Prompt 9 – SAST Findings Review
 
 ```text
-Review the following SAST output.
-
-[Paste Findings]
+Review the static application security testing findings.
 
 Help classify:
 
-1. True Positive
-2. False Positive
-3. Risk Severity
-4. Recommended Fix
-5. Validation Steps
+1. True Positives
+2. False Positives
+3. Severity Level
+4. Remediation Recommendations
+5. Verification Approach
 ```
 
 ---
@@ -171,21 +179,21 @@ Help classify:
 # Prompt 10 – Executive Summary Support
 
 ```text
-Summarize the following assessment findings for a non-technical audience.
-
-[Paste Findings]
+Summarize the web application assessment findings for management.
 
 Focus on:
 
-- Business impact
-- Overall risk level
 - Key vulnerabilities discovered
-- Remediation status
+- Overall risk level
+- Business impact
+- Remediation activities completed
 - Recommended next steps
+
+The summary should be concise, professional, and suitable for non-technical stakeholders.
 ```
 
 ---
 
 ## Notes
 
-These prompts were used as supporting guidance during the web application security assessment. All findings, conclusions, and remediation recommendations were validated against observed application behavior and collected evidence before inclusion in project deliverables.
+These prompts were used as supporting guidance during the web application security assessment activities performed in Project KAVACH. All findings, conclusions, and remediation recommendations were validated against actual testing evidence collected from DVWA and OWASP Juice Shop environments before inclusion in project deliverables.
